@@ -5,12 +5,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
     },
     password: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 })
 
-module.exports = User = mongoose.model('user',UserSchema)
+module.exports = User = mongoose.model('user', UserSchema)
