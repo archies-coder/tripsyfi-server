@@ -44,6 +44,10 @@ app.use(userRoute)
 const loginRoute = require('./app/routes/login.route')
 app.use(loginRoute)
 
+app.get('/', (req, res) => {
+    res.send('Working')
+})
+
 mongoose
     .connect(dbURI, {
         useUnifiedTopology: true,
@@ -52,12 +56,11 @@ mongoose
         useFindAndModify: false,
     })
     .then(() => {
-        console.log(`connected db ${dbURI}`)
+        console.log(`connected`)
     })
-    .catch(err => console.log(err))
 
 const PORT = process.env.PORT || 8080
 
 app.listen(PORT, () => {
-    console.log(`Server runnng ${process.env.NODE_ENV} build on port ${PORT}`)
+    console.log(`Server runnng on port ${PORT}`)
 })
