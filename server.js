@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const options = {
     url: dbURI,
-    ttl: 7 * 24 * 60 * 60,
+    ttl: 365 * 24 * 60 * 60,
 }
 
 const sess = {
@@ -31,6 +31,9 @@ const sess = {
     secret: SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+    },
 }
 
 //use sessions for tracking login
@@ -43,10 +46,10 @@ app.use(loginRoute)
 
 mongoose
     .connect(dbURI, {
+        useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
-        useUnifiedTopology: true,
     })
     .then(() => {
         console.log(`connected db ${dbURI}`)
